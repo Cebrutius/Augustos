@@ -45,9 +45,6 @@
 </head>
 <body>
     <div id="chat-container">
-        <h2>Chat Entre Você e Sua Esposa</h2>
-        <label for="username">Digite seu nome de usuário:</label><br>
-        <input type="text" id="username" placeholder="Seu nome de usuário"><br><br>
         <div id="chat-messages">
             <p>Bem-vindo ao chat!</p>
         </div>
@@ -56,31 +53,25 @@
     </div>
 
     <script>
-        const usernameInput = document.getElementById('username');
         const messageInput = document.getElementById('message-input');
         const sendButton = document.getElementById('send-button');
         const chatMessages = document.getElementById('chat-messages');
 
         sendButton.addEventListener('click', function() {
-            sendMessage();
-        });
-
-        messageInput.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                sendMessage();
-            }
-        });
-
-        function sendMessage() {
-            const username = usernameInput.value.trim();
             const message = messageInput.value.trim();
-            if (username !== '' && message !== '') {
-                const formattedMessage = '<p><strong>' + username + ':</strong> ' + message + '</p>';
+            if (message !== '') {
+                const formattedMessage = '<p><strong>Você:</strong> ' + message + '</p>';
                 chatMessages.innerHTML += formattedMessage;
                 chatMessages.scrollTop = chatMessages.scrollHeight;
                 messageInput.value = '';
             }
-        }
+        });
+
+        messageInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendButton.click();
+            }
+        });
     </script>
 </body>
 </html>
