@@ -3,14 +3,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chat Entre Você e Sua Esposa - Login</title>
+    <title>Chat Entre Você e Sua Esposa</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        #chat-messages {
+            min-height: 300px;
+            max-height: 400px;
+            overflow-y: auto;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        #message-input {
+            width: calc(100% - 70px);
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        #send-button {
+            width: 60px;
+            padding: 10px;
+            border: none;
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+    </style>
 </head>
 <body>
-    <h2>Chat Entre Você e Sua Esposa</h2>
-    <form action="chat.html" method="GET">
-        <label for="username">Nome de Usuário:</label><br>
-        <input type="text" id="username" name="username" required><br><br>
-        <input type="submit" value="Entrar">
-    </form>
+    <div class="container">
+        <h2>Chat Entre Você e Sua Esposa</h2>
+        <div id="chat-messages" class="chat-box">
+            <!-- Mensagens serão exibidas aqui -->
+        </div>
+        <input type="text" id="message-input" placeholder="Digite sua mensagem...">
+        <button id="send-button">Enviar</button>
+    </div>
+
+    <script>
+        const messageInput = document.getElementById('message-input');
+        const sendButton = document.getElementById('send-button');
+        const chatMessages = document.getElementById('chat-messages');
+
+        sendButton.addEventListener('click', function() {
+            sendMessage();
+        });
+
+        messageInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        function sendMessage() {
+            const message = messageInput.value.trim();
+            if (message !== '') {
+                const formattedMessage = '<p><strong>Você:</strong> ' + message + '</p>';
+                chatMessages.innerHTML += formattedMessage;
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+                messageInput.value = '';
+            }
+        }
+    </script>
 </body>
 </html>
